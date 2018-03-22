@@ -1,1 +1,0 @@
-../../Practica_3/js02.js

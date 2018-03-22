@@ -1,0 +1,65 @@
+<!-- Javier Fernández Morata || login: jmorata-->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title> Practica 1.2. Formularios </title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </script>
+</head>
+
+<body>
+  <h1> JAVIBANK </h1>
+  <div id="Sesion">
+    <form action="sesion.html" class="form-inline">
+      <label for="usuario">DNI</label>
+      <input type="text" name="DNI" value="usuario">
+      <label for="contraseña">Clave de Acceso</label>
+      <input type="password" name="contraseña" value="contraseña">
+      <input type="submit" value="Enviar">
+    </form>
+  </div>
+  <br>
+  <hr>
+  <div id="transferencia">
+    Rellene los siguientes campos para realizar una transferencia
+    <form class="" action="operacion.html">
+      <fieldset>
+        <legend>
+          <h6>Datos de Transferencia - Cumplimente los siguientes datos y pulse Aceptar</h6></legend>
+        <label for="Origen"> Cuenta de cargo </label>
+        <input type="text" class="form-control" name="CuentaO" id="Origen"><br><br>
+        <fieldset>
+          <legend>Datos del Beneficiario</legend>
+          <label for="Nombre"> Nombre</label>
+          <input type="text" id="Nombre" name="NombreD" class="form-control"> <br> Residente en España
+          <input type="radio" name="España" value="Si" checked>Si
+          <input type="radio" name="España" value="No"> No <br>
+          <label for="Destino">Cuenta Destino: ES XX</label>
+          <input type="text" id="Destino" name="CuentaD" class="form-control">
+        </fieldset><br>
+        <fieldset>
+          <legend>Datos De Transferencia </legend>
+          <label for="Importe">Introduzca el Importe</label>
+          <input type="number" name="Importe" id="Importe"> <br>
+          <label for="Concepto">Concepto de la Transferencia</label>
+          <input type="text" name="Concepto" id="Concepto" value="Trabajo" class="form-control"> <br>
+          <label for="Fecha">Fecha de emisión</label>
+          <input type="datetime-local" name="Fecha" id="Fecha"> <br> Periodicidad
+          <input type="radio" name="Periodicidad" value="SI" checked>Una sola vez
+          <input type="radio" name="España" value="NO">De manera Periodica<br>
+        </fieldset><br>
+        <label for="email">¿Quiere recibir el recibo por email? Introduzca aqui su correo </label>
+        <input type="email" name="email" id="email">
+        <input type="submit" value="Enviar">
+        <input type="submit" value="Cancelar">
+      </fieldset>
+    </form>
+    <hr>
+  </div>
+</body>
+
+</html>

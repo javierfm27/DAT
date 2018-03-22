@@ -1,0 +1,216 @@
+Javier Fernández Morata
+login: jmorata
+
+============================================================================================================================
+Práctica 2.1. Análisis de selectores
+============================================================================================================================
+*EJEMPLO 1*
+Para comenzar observamos como el texto tiene un fondo beige y es debido a la regla de selector universal, la cual aplica
+a todos los elementos -> * {background-color: beige}
+Observando las reglas CSS vemos como para el elemento h1, cuyo contenido es "Hola, css", vemos que se le aplica la regla
+de alinear al centro del documento html y un color violeta a la letra
+La línea "Este párrafo no tiene nada en particular" se ve afectada por la regla->
+p {
+      color: blue;
+      text-align: left;
+      background-color: yellow;
+    }
+
+"Este parrafo tiene un formato terrible." A esta línea se le aplica la regla:
+.feo {
+  color: red;
+  background-color: pink;
+}
+Hay que decir que tambien es un elemento p, pero al ser esta regla mas específica se le aplica esta regla de clase.
+
+"Este aparece con los colores invertidos." Ocurre lo mismo que con la anterior, la regla del elemento p se le aplica, pero
+este elemento es un elemento de la clase inverso, por tanto la regla mas especifica es:
+.inverso {
+  color: white;
+  background-color: black;
+}
+
+*EJEMPLO 2*
+a)Comenzemos con la línea "Párrafo 1. No está dentro de un div": Donde no se le aplica ninguna regla, ya que no cumple los
+requisitos de estas.
+
+b)<p>Párrafo 2. Está directamente dentro de un div.</p>, Para este contenido al estar directamente contenido en un elemento div
+se le aplican las siguientes reglas:
+  div p {color: blue;}  div>p {font-size: 200%;}
+
+c)<h2>Una sección</h2>
+
+d)<p>Párrafo 3. Está dentro de un div, pero no directamente</p>. Este elemento al estar contenido en un div, se le aplicara
+div p {color: blue;}. Pero no se le aplica la del tamaño de fuente ya que no esta aplicada directamente, si no que
+hay un elemento section de por medio
+
+e)<p>Párrafo 4. Está directamente dentro de un div.</p>Al llegar a este elemento se ha cerrado el elemento section, por
+lo que esta contenido directamente en div, ocurriria lo mismo que en el apartado b
+
+f)<p>Párrafo 5. Está directamente dentro de un div, y junto a otro párrafo.</p>. Se le aplicaran las mismas reglas que
+en los apartados b) y e), y ademas, al estar inmediatamente despues que un elemento <p>, se le aplica:
+p+p {background-color: yellow;}
+
+*EJEMPLO 3*
+a) "1.El país España". A esta linea no se le aplica ninguna regla de las descritas en el CSS
+
+b) "2.La comunidad Castilla la Mancha". Al ser de la clase 'castilla-la-mancha', se le aplica la siguiente regla:
+.castilla-la-mancha {text-decoration: underline;}
+
+c) "3.La ciudad de Toledo". Al estar contenida en el div de 'castilla-la-mancha', se le aplica la regla del apartado b).
+Aparece en rojo debido a que se le aplica la regla mas especifica qdel color, que en este caso es:
+.españa .toledo {  color: red;}.
+Y aparece centrado, ya que la regla     .toledo, .cuenca {text-align: center;}, se aplica para todos los elementos de clase
+toledo y cuenca
+
+d) "4.La ciudad de Cuenca". Por la razon de c), aparece subrayado. Y aparece centrado debido a la regla descrita en c)
+
+e) "5.La ciudad Albacete".Al no existir ninguna regla para la clase Albacete, no se le aplica nada. Aparece subrayado debido
+a que seguimos dentro de un elemento de la clase 'castilla-la-mancha'
+
+f) "6.El país Estados Unidos". Al no existir regla pais Estados Unidos, esta línea permanece intacta
+
+g) "7.El estado de Ohio ". Misma razón que f). No hay ni regla para la clase Ohio, ni para la clase 'pais Estados Unidos'
+
+h) "8.La ciudad de Toledo ". Al tener la clase de 'toledo'. Se le aplican las siguientes reglas:
+.toledo, .cuenca {text-align: center;} y .toledo {color: blue;}
+
+============================================================================================================================
+Práctica 2.2. Análisis de selectores
+============================================================================================================================
+a) <p>Párrafo 1.</p> Observando las reglas del CSS, vemos como no hay ninguna que se aplique para un elemento <p>, solo
+para un elemento <p> si tiene identificador 'alpha'
+
+b)  <p id="alfa">Párrafo 2, llamado alfa. Está dentro de un elemento div, pero no es un elemento div</p>
+Al tener el id 'alfa', se le aplicaran las siguientes reglas:
+#alfa {color: blue;}-> Color de letra azul, por tener el id 'alfa'
+p#alfa {font-size: 200%;}-> Tamaño de fuente 200% debido a que es un elemento p con id 'alfa'
+div#alfa{background-color: yellow;}-> No se aplica. Si estamos en un elemento div, pero esta regla es para aquel elemento
+div que tenga un id 'alfa'. No se aplica, porque este no es el caso
+div #alfa{font-style: italic;}-> Fuente italica, ya que estamos dentro de un div con un id 'alfa'. Es decir Nuestro elemento
+de id 'alfa' esta contenido en un div, es por eso, por lo que esta regla se le aplica.
+
+c)  <p>Párrafo 3.</p>. No se le aplica ninguna regla. Si, esta contenido en un div, pero ese div no tienen id 'alfa'
+
+d)  <p>Párrafo 4. No está dentro de elemento div.</p>. Es elemento p, pero al no tener el id 'alfa'. Tampoco se le aplica
+ninguna regla
+
+============================================================================================================================
+Práctica 2.3. Análisis de selectores
+============================================================================================================================
+Estas son las siguientes reglas del CSS:
+.urjc {color: #CB0017;} || .urjc.reglamento {text-decoration: underline;} || .urjc, .reglamento {background-color: lightblue;}
+
+a)   <p>Párrafo 1.</p>: Como vemos este elemento no tiene ninguna clase, por tanto, observando las reglas que hay en el CSS
+de este documento, todas las reglas de este HTML son para elementos de clase, es por eso, por lo que no se le aplica ninguna
+
+b)  <p class="reglamento urjc">Párrafo 2, clases reglamento y urjc.</p>
+Al tener este elemento <p> vemos como es de la clase urjc, y de la clase reglamento, por tanto se le aplican todas las reglas
+del CSS
+
+c)   <p class="reglamento ucm">Párrafo 2, clases reglamento y ucm.</p>
+Solo se le aplica la regla del fondo, al tener la clase reglamento
+
+d)  <p class="matriculacion">Párrafo 3, clase matriculación.</p>
+No tiene ninguna clase, por lo que no se le aplica ninguna regla
+
+e)  <p class="investigacion urjc">Párrafo 4, clases investigacion y urjc.</p>
+Tiene la clase, investigación y urjc. Por tanto se le aplica la regla del color y del fondo
+
+f)  <p class="investigacion uc3m">Párrafo 4, clases investigacion y uc3m.</p>
+No se le aplica ninguna regla al no existir ninguna para la clase: ivestigacion y uc3m
+
+============================================================================================================================
+Práctica 2.4. Análisis de selectores
+============================================================================================================================
+Las reglas del CSS para este documento HTML, son las siguientes, al tener un tipo de selector nuevo, vamos a analizar en que
+caso se aplicarían las siguientes reglas:
+
+(1)-> p[class] {border: 1px solid green;}: a cualquier elemento p, que tenga una clase
+
+(2)-> p[class="ventas"] {font-style: italic;}: Al elemento <p>, que tenga la clase ventas
+
+(3)-> p[class~="ventas"] {font-size: x-large;}: Al elemento <p>, que tenga al menos una clase, y uno de sus valores sea ventas
+
+a)   <p>Párrafo 1.</p>: Al no tener el atributo clase, no se le aplica ninguna regla
+
+b)   <p class="compras">Párrafo 2, clases compras.</p>: Al tener al menos solo el atributo de clase, se le aplica (1)
+
+c)  <p class="ventas">Párrafo 3, clases ventas.</p>: Como tiene el atributo clase, y uno de sus valores es ventas. Se le
+aplican las tres reglas
+
+d)   <p class="ventas promociones">Párrafo 4, clases ventas y promociones.</p>: Por lo mismo que el apartado c)
+============================================================================================================================
+Práctica 2.5. Análisis de selectores
+============================================================================================================================
+ej251-> En este ejercicio he definido tres reglas:
+p em{color:red}: donde se le aplicara a las letras el color rojo que estén en aquellos elementos em anidados en elementos
+<p>
+.lista{color: green}: Aplica el color de letra verde a los elementos con la clase lista
+.lisa, p em {font-style: italic;}: tanto a los elementos de clase lista como a los elementos <em> anidados en <p> tendran
+el estilo de fuente italica
+div.deselance{text-align: right}: Aplicara a los elementos div de clase desenlace
+div p ol {text-decoration: line-through;}: elementos ol anidados en p y a su vez anidados en div
+div.desarrollo {text-align: center;}: A elementos <div> de clase desarrollo
+
+
+
+
+ej252-> En el ejercicio 252 usamos los selectores de identificadores donde usamos las siguientes reglas.
+#Titulo {
+  color: green;
+}
+Aplica al elemento cuyo identificador es 'Titulo' donde aplicaremos el color de letra verde
+#Menu {
+  background-color: red;
+  border-color: black;
+  font-weight: bold;
+}
+Aplica al elemento de id 'Menu', donde cambiamos el color de fondo, aplicamos color al borde y ademas añadimos el tamaño de la
+fuente
+#Footer {
+  background-color: blue;
+}
+id 'Footer', donde cambiamos el color de fondo
+
+
+
+ej253-> En este ejercicio probamos los selectores de concatenación. Hemos definido en nuestro html las siguientes reglas:
+.blog-entry .content {
+  text-align: center;
+  background-color: red;
+  color: white;
+}
+Se aplica a los elementos de clase content que esten dentro de los elementos de clase blog-entry
+Donde, el texto se alineara al centro, tendran un fondo rojo, y las letra se verán en blanco
+
+.blog-entry.first-blog {
+  font-style: oblique;
+}
+Aquellos elementos que sean de ambas clases, en este caso de la clase ".blog-entry" y ".first-blog"
+
+h2 + h3 {
+  text-align: right;
+}
+Aplica a los elementos <h3> que estén inmeditamente despues de un elemento <h2>. En este caso, el texto se alineará a la derecha
+
+div > p {
+  color: blue;
+}
+Aplica a aquellos elementos <p> que esten directamente contenidos dentro de un elemento <div>. La letra se verá azul
+
+
+
+ej254-> En este ejercicio hemos puesto a prueba los selectores de atributos. He definido las siguientes reglas:
+div[class]{
+  font-style: oblique;
+}
+Esta regla se aplicara a todos los elementos div que contengan un atributo class. La regla que se aplica es que la fuente aparecera de forma
+oblique
+
+div[class="post"]{
+  font-weight: lighter;
+  background-color: blue;
+}
+Esta regla se aplicara a los elementos div, con el atributo class y ademas que tengan el valor post. La regla modifica el grosor de la fuente
+y ademas aparecera con fondo azul

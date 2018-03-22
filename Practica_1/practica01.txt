@@ -1,0 +1,35 @@
+Javier Fernández Morata
+login: jmorata
+
+================================================================================
+PRACTICA 1.3. W3C VALIDATOR
+================================================================================
+Con el html principal de el periodico nacional El Mundo,amazon, booking, he encontrado los siguientes errores
+  1.Stray end tag div.
+
+  From line 620, column 1; to line 620, column 6
+  Un error bastante llamativo, que es el de la falta de fin de etiqueta de un elemento div, para arreglarlo
+  bastaría con añadir ese "end tag"
+  ----------------------------------------------------------------------------------------------------------
+  2.Error: An img element must have an alt attribute, except under certain conditions. For details, consult guidance on providing text alternatives for images.
+
+  Error bastante grave,debido a que tal y como hemos visto en clase cuando insertamos una imagen, hay dos atributos que nunca deben
+  faltar, y son src y alt. En este caso falta el atributo alt. Para arreglar dicho error, bastaría con añadir el atributo
+  de manera que alt describa que se representa en la imagen
+  ------------------------------------------------------------------------------------------------------------
+  3.Error: Attribute value not allowed on element meta at this point.
+
+  Se añade un atributo a un elemento que no aplica dicho atributo, para eliminar el error bastaria con eliminar el atributo
+  ------------------------------------------------------------------------------------------------------------
+  4. Error: Saw <!-- within a comment. Probable cause: Nested comment (not allowed).
+
+  Comienzo de etiqueta de comentario, sin ningún comentario. Solucion: Eliminar dicha "start tag"
+  ------------------------------------------------------------------------------------------------------------
+  5. Error: Duplicate ID destination__error.
+
+  Error grave, ya que solo puede haber un elemento con un id, en este caso se repite el id en dos elementos. Para solucionarlo
+  quitamos el id en uno de los dos atributos
+  ------------------------------------------------------------------------------------------------------------
+  6. Error: Attribute valign not allowed on element img at this point.
+
+  Atributo que no pertence al elemento img. Para solución, eliminamos el atributo

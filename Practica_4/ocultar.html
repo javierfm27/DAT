@@ -1,0 +1,246 @@
+<!-- Javier Fernández Morata || login: jmorata-->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Practica 2.9. Horario</title>
+  <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./bootstrap/css/bootstrap-grid.min.css">
+  <!-- Latest compiled JavaScript -->
+  <script src="./bootstrap/js/bootstrap.min.js">
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+  </script>
+  <style>
+    body {
+      text-align: center;
+    }
+
+    div {
+      border-color: black;
+      border-width: thin;
+      ;
+      border-style: solid;
+    }
+
+    div.especif {
+      background-color: blue;
+      color: white;
+    }
+
+    div.sot {
+      color: white;
+      background-color: #08298A;
+    }
+
+    div.isi {
+      color: white;
+      background-color: #0B610B;
+    }
+
+    div.inal {
+      color: white;
+      background-color: #DF013A;
+    }
+
+    div.pdac {
+      color: white;
+      background-color: #F7FE2E;
+    }
+
+    div.idiom {
+      color: red;
+      background-color: #62E882;
+    }
+
+    div.dat {
+      color: blue;
+      background-color: #FF2D22;
+    }
+
+    div.terminales {
+      color: red;
+      background-color: #1BFFF9;
+    }
+
+    .oculto-1 {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <button id="1Cuatrimestre" class="btn btn-success">Ver 1º Cuatrimestre</button>
+    <button id="2Cuatrimestre" class="btn btn-danger">Ver 2º Cuatrimestre</button>
+    <div class="oculto-1 1Cuatrimestre">
+      <div class="row">
+        <div class="col-md-2 especif">
+          HORA
+        </div>
+        <div class="col-md-2 especif">
+          LUNES
+        </div>
+        <div class="col-md-2 especif">
+          MARTES
+        </div>
+        <div class="col-md-2 especif">
+          MIERCOLES
+        </div>
+        <div class="col-md-2 especif">
+          JUEVES
+        </div>
+        <div class="col-md-2 especif">
+          VIERNES
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2">
+          9:00 - 11:00
+        </div>
+        <div class="col-md-2 sot">
+          Sistemas Operativos
+        </div>
+        <div class="col-md-2">
+          -
+        </div>
+        <div class="col-md-2">
+          -
+        </div>
+        <div class="col-md-2">
+          -
+        </div>
+        <div class="col-md-2">
+          -
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2">
+          11:00 - 13:00
+        </div>
+        <div class="col-md-2 isi">
+          ISI
+        </div>
+        <div class="col-md-2 pdac">
+          PDAC
+        </div>
+        <div class="col-md-2 isi">
+          ISI
+        </div>
+        <div class="col-md-2 pdac">
+          PDAC
+        </div>
+        <div class="col-md-2 ">
+          -
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2">
+          13:00 - 15:00
+        </div>
+        <div class="col-md-2 inal">
+          Inalámbricas
+        </div>
+        <div class="col-md-2">
+          -
+        </div>
+        <div class="col-md-2 inal">
+          Inalámbricas
+        </div>
+        <div class="col-md-2">
+          -
+        </div>
+        <div class="col-md-2">
+          -
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    $(document).ready(function() {
+      $("#1Cuatrimestre").click(function() {
+        $(".1Cuatrimestre").toggleClass("oculto-1")
+      });
+      $("#2Cuatrimestre").click(function() {
+        $(".2Cuatrimestre").toggleClass("oculto-1")
+      });
+    });
+  </script>
+  <hr>
+  <br>
+  <div class="2Cuatrimestre oculto-1">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-2 especif">
+          HORA
+        </div>
+        <div class="col-md-2 especif">
+          LUNES
+        </div>
+        <div class="col-md-2 especif">
+          MARTES
+        </div>
+        <div class="col-md-2 especif">
+          MIERCOLES
+        </div>
+        <div class="col-md-2 especif">
+          JUEVES
+        </div>
+        <div class="col-md-2 especif">
+          VIERNES
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          9:00 - 11:00
+        </div>
+        <div class="col-md-2 idiom">
+          IDIOMA MODERNO
+        </div>
+        <div class="col-md-2">
+          -
+        </div>
+        <div class="col-md-2 idiom">
+          IDIOMA MODERNO
+        </div>
+        <div class="col-md-4">
+          -
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          11:00 - 13:00
+        </div>
+        <div class="col-md-2 dat">
+          DAT
+        </div>
+        <div class="col-md-2 dat">
+          DAT
+        </div>
+        <div class="col-md-6">
+          -
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          13:00 - 15:00
+        </div>
+        <div class="col-md-2 terminales">
+          Terminales
+        </div>
+        <div class="col-md-2 terminales">
+          Terminales
+        </div>
+        <div class="col-md-6">
+          -
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

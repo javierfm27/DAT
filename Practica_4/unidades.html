@@ -1,0 +1,41 @@
+<!-- Javier Fernández Morata || login: jmorata-->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Práctica 4.2. Escritura y lectura de datos HTML-jQuery</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript" src="./js/velocidad.js"></script>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <h1>VELOCIDAD</h1>
+    <span id="velocidad">40</span> <br>
+    <p>velocidad expresada en <span id="salida">40 m/s</span></p>
+    <button type="button" id="mps" class="btn-info">m/s</button>
+    <button type="button" id="kmph" class="btn-info">km/h</button>
+    <button type="button" id="mph" class="btn-info">mph</button>
+  </div>
+  <script>
+    $(document).ready(function() {
+      let v_in = $("#velocidad").text()
+      $("#mps").click(function() {
+        let v_out = conversion(v_in, "m/s")
+        $("#salida").text(v_out + " m/s")
+      });
+      $("#kmph").click(function() {
+        let v_out = conversion(v_in, "km/h")
+        $("#salida").text(v_out + " km/h")
+      });
+      $("#mph").click(function() {
+        let v_out = conversion(v_in, "mph")
+        $("#salida").text(v_out + " mph")
+      });
+    });
+  </script>
+</body>
+
+</html>

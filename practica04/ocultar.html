@@ -72,7 +72,7 @@
 
 <body>
   <div class="container-fluid">
-    <button id="1Cuatrimestre" class="btn btn-success">Ver 1º Cuatrimestre</button>
+    <button id="1Cuatrimestre" class="btn btn-success" data-toggle="tooltip" title="Click para ver el cuatrimestre">Ver 1º Cuatrimestre</button>
     <button id="2Cuatrimestre" class="btn btn-danger">Ver 2º Cuatrimestre</button>
     <div class="oculto-1 1Cuatrimestre">
       <div class="row">
@@ -168,6 +168,7 @@
       $("#2Cuatrimestre").click(function() {
         $(".2Cuatrimestre").toggleClass("oculto-1")
       });
+      $('[data-toggle="tooltip"]').tooltip()
     });
   </script>
   <hr>

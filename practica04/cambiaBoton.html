@@ -4,17 +4,18 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Ejemplo de uso de toggleClass</title>
+  <title>Practica 4.3. </title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <style>
     .oculto {
       display: none;
     }
   </style>
+  
 </head>
 
 <body>
-  <button id="boton01">Ver foto</button>
+  <button id="boton01" data-toggle="tooltip" title="Click para ver la foto del documento" data-placement="bottom">Ver foto</button>
   <div id="marco_foto" class="oculto">
     <img src="images/foto.jpg" alt="Foto de prueba">
   </div>
@@ -23,12 +24,16 @@
       $("#boton01").click(function() {
         $("#marco_foto").toggleClass("oculto")
         let textButton = $("#boton01").text()
-        if (textButton == "Ver foto"){
-          $("#boton01").text("Ocultar foto")
-        }else if(textButton == "Ocultar foto")
-          $("#boton01").text("Ver foto")
+        if (textButton == "Ver foto") {
+          $(this).text("Ocultar foto")
+          $(this).attr("title", "Click para dejar de ver la imagen")
+        } else if (textButton == "Ocultar foto"){
+          $(this).text("Ver foto")
+          $("#boton01").attr("title", "Click para ver imagen")
+        }
       });
     });
   </script>
 </body>
+
 </html>

@@ -34,6 +34,8 @@
         let v_out = conversion(v_in, "mph")
         $("#salida").text(v_out + " mph")
       });
+      $("#mps").attr({'data-toggle':'tooltip','title':'Click para convertir a m/s'})
+      $('[data-toggle="tooltip"]').tooltip()
     });
   </script>
 </body>

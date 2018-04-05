@@ -41,14 +41,11 @@
           alert("Para contraseña valida:\nMin Longitud: " + minlongitud + "\nMin Minus: " + minMinus + "\nMin Mayus: " + minMayus + "\nMin Num: " + minNum + "\nMin Caracter Especial: " + minCharSp)
         }
       });
-      $("#repitecontraseña").on('focusout change',function(){
+      $("#repitecontraseña").on('focusout mouseup change',function(){
         let repitpassword = $(this).val()
         let password = $("#contrasenia1").val()
-        console.log(password)
-        if (repitepassword == password){
-          alert("Valido")
-        }else{
-          alert("No coinciden")
+        if(repitpassword == password){
+          alert("Contraseñas Coinciden")
         }
       });
     });

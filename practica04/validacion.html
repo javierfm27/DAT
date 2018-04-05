@@ -12,8 +12,47 @@
 
 <body>
   <div class="container-fluid">
-    HOLA BOOTSTRAP
+    <div class="form-group">
+      <label for="contrasenia">Contraseña</label>
+      <input type="password" class="form-control" id="contrasenia1" name="pass1">
+    </div>
+    <div class="form-group">
+      <label for="repitecontrasenia">Repite Contraseña</label>
+      <input type="password" class="form-control" id="repitecontraseña" name="pass2">
+    </div>
+    <div class="form-group">
+      <input type="submit" value="Enviar">
+    </div>
   </div>
+  <script>
+    $(document).ready(function() {
+      $("#contrasenia1").on('focusout', function() {
+        let password = $(this).val()
+        let special = ["@/>"]
+        let minlongitud = 1
+        let minMinus = 1
+        let minMayus = 1
+        let minNum = 1
+        let minCharSp = 1
+        let valida = passwordCheck(password, minlongitud, minMinus, minMayus, minNum, minCharSp, special)
+        if (valida) {
+          alert("Contraseña Valida")
+        } else {
+          alert("Para contraseña valida:\nMin Longitud: " + minlongitud + "\nMin Minus: " + minMinus + "\nMin Mayus: " + minMayus + "\nMin Num: " + minNum + "\nMin Caracter Especial: " + minCharSp)
+        }
+      });
+      $("#repitecontraseña").on('focusout change',function(){
+        let repitpassword = $(this).val()
+        let password = $("#contrasenia1").val()
+        console.log(password)
+        if (repitepassword == password){
+          alert("Valido")
+        }else{
+          alert("No coinciden")
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>

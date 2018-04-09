@@ -8,6 +8,12 @@
   <script type="text/javascript" src="./js/password.js"></script>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <style media="screen">
+    #validacion1, #validacionSamePassword{
+      color: red;
+      font: serif;
+    }
+  </style>
 </head>
 
 <body>
@@ -16,17 +22,20 @@
       <label for="contrasenia">Contraseña</label>
       <input type="password" class="form-control" id="contrasenia1" name="pass1">
     </div>
+    <div id="validacion1"></div>
+    <hr>
     <div class="form-group">
       <label for="repitecontrasenia">Repite Contraseña</label>
       <input type="password" class="form-control" id="repitecontraseña" name="pass2">
     </div>
+    <div id="validacionSamePassword"></div>
     <div class="form-group">
       <input type="submit" value="Enviar">
     </div>
   </div>
   <script>
     $(document).ready(function() {
-      $("#contrasenia1").on('focusout', function() {
+      $("#contrasenia1").on('change keyup paste mouseu', function() {
         let password = $(this).val()
         let special = ["@/>"]
         let minlongitud = 1
@@ -36,16 +45,19 @@
         let minCharSp = 1
         let valida = passwordCheck(password, minlongitud, minMinus, minMayus, minNum, minCharSp, special)
         if (valida) {
-          alert("Contraseña Valida")
+          $("#validacion1").text("Contraseña valida")
         } else {
-          alert("Para contraseña valida:\nMin Longitud: " + minlongitud + "\nMin Minus: " + minMinus + "\nMin Mayus: " + minMayus + "\nMin Num: " + minNum + "\nMin Caracter Especial: " + minCharSp)
+          texto = "Para contraseña valida: Min Longitud: " + minlongitud + "\nMin Minus: " + minMinus + "\nMin Mayus: " + minMayus + "\nMin Num: " + minNum + "\nMin Caracter Especial: " + minCharSp
+          $("#validacion1").text(texto)
         }
       });
-      $("#repitecontraseña").on('focusout mouseup change',function(){
+      $("#repitecontraseña").on('change keyup paste mouseu',function(){
         let repitpassword = $(this).val()
         let password = $("#contrasenia1").val()
         if(repitpassword == password){
-          alert("Contraseñas Coinciden")
+          $("#validacionSamePassword").text("Contraseñas Coinciden")
+        }else{
+          $("#validacionSamePassword").text("No Coinciden")
         }
       });
     });

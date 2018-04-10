@@ -6,8 +6,7 @@ login: jmorata
 'use strict'
 function conversion(src,dest){
   if(!(typeof dest == 'string')){
-    console.log("Error: The parameter dest must be string");
-    return -1;
+    throw new TypeError("Error: The parameter dest must be string");
   }
   if (typeof src == 'string'){
     src = Number(src);
@@ -24,8 +23,7 @@ function conversion(src,dest){
       return(result.toFixed(2));
       break;
     default:
-      console.log("Error: dest must be 'm/s','km/h' o 'mph'");
-      return -1;
+      throw new SyntaxError("Error: dest must be 'm/s','km/h' o 'mph'");
   }
 }
 
@@ -33,7 +31,11 @@ function conversion(src,dest){
 let dest, metros, unidad;
 metros = '33';
 unidad = 'm/s';
-dest = conversion(metros,unidad);
-if (dest != -1){
-  console.log(metros + 'm/s son ' + dest + ' ' + unidad);
+try{
+  dest = conversion(metros,unidad);
+  if (dest != -1){
+    console.log(metros + 'm/s son ' + dest + ' ' + unidad);
+  }
+}catch (e){
+  console.log('Capturada Excepcion->' + e.name + " " + e.message)
 }

@@ -4,6 +4,10 @@ Javier Fernández Morata
 login: jmorata
 */
 'use strict'
+//Definimos la clase Calculadora
+class Calculadora{
+  
+}
 //States
 //State First Operating
 function firstOperating(key,calculator){

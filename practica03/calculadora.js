@@ -1,5 +1,5 @@
-#!/usr/bin/nodejs
 /*
+#!/usr/bin/nodejs
 Javier Fernández Morata
 login: jmorata
 */
@@ -9,7 +9,6 @@ login: jmorata
 function firstOperating(key,calculator){
   calculator.firstOperating = String(calculator.firstOperating) + key
   calculator.firstOperating = Number(calculator.firstOperating)
-  console.log(calculator.firstOperating)
 }
 //Waiting Second Operating
 function waitingSecondOperating(calculator,key){
@@ -21,7 +20,6 @@ function waitingSecondOperating(calculator,key){
 function secondOperating(key,calculator){
   calculator.secondOperating = String(calculator.secondOperating) + key
   calculator.secondOperating = Number(calculator.secondOperating)
-  console.log(calculator.secondOperating)
 }
 
 //State Show result
@@ -30,19 +28,15 @@ function showResult(calculator){
   switch (operator) {
     case "+":
       calculator.solution = calculator.firstOperating + calculator.secondOperating
-      console.log(calculator.solution)
       break;
     case "*":
       calculator.solution = calculator.firstOperating * calculator.secondOperating
-      console.log(calculator.solution)
       break;
     case "-":
       calculator.solution = calculator.firstOperating - calculator.secondOperating
-      console.log(calculator.solution)
       break;
     case "/":
       calculator.solution = calculator.firstOperating / calculator.secondOperating
-      console.log(calculator.solution)
       break;
   }
 }
@@ -54,7 +48,6 @@ function resetCalculator(calculator){
   calculator.operator = NaN
   calculator.haveOperator = false
   calculator.solution = 0
-  console.log(0)
 }
 
 //CheckOperator
@@ -79,6 +72,7 @@ function getKey(key, calc){
     if(checkOperator(key)){
       if(calc.haveOperator == true){
         showResult(calc)
+        return(calc.solution)
         calc.firstOperating = 0
         firstOperating(String(calc.solution),calc)
         calc.secondOperating = 0
@@ -89,15 +83,19 @@ function getKey(key, calc){
     }else{
       if(key == "="){
         showResult(calc)
+        return(calc.solution)
       }else if (key == "c"){
         resetCalculator(calc)
+        return(0)
       }
     }
   }else{
     if(calc.haveOperator){
       secondOperating(key,calc)
+      return(calc.secondOperating)
     }else{
       firstOperating(key,calc)
+      return(calc.firstOperating)
     }
   }
 }
@@ -112,19 +110,19 @@ function testCalc(){
     solution : 0,
     haveOperator: false,
   }
-  getKey(3,calculator)
-  getKey("+",calculator)
-  getKey(5,calculator)
-  getKey("*",calculator)
-  getKey(2,calculator)
-  getKey("=",calculator)
-  getKey("c",calculator)
-  getKey(1,calculator)
-  getKey(1,calculator)
-  getKey("*",calculator)
-  getKey(2,calculator)
-  getKey("=",calculator)
+  console.log(getKey(3,calculator))
+  console.log(getKey("+",calculator))
+  console.log(getKey(5,calculator))
+  console.log(getKey("*",calculator))
+  console.log(getKey(2,calculator))
+  console.log(getKey("=",calculator))
+  console.log(getKey("c",calculator))
+  console.log(getKey(1,calculator))
+  console.log(getKey(1,calculator))
+  console.log(getKey("*",calculator))
+  console.log(getKey(2,calculator))
+  console.log(getKey("=",calculator))
 }
 
 //Main de JavaScript
-testCalc()
+//testCalc()

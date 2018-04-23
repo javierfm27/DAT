@@ -13,11 +13,17 @@
 
 <body>
   <div class="container">
-    <p>GEOLOCALIZACION </p>
+    <p id="message"></p>
+
+    <footer><button id="removeStorage" class="btn btn-warning" name="button">Borrar Info</button></footer>
   </div>
   <script>
     $(document).ready(function(){
-      initHtml()
+      let message = initHtml()
+      navigator.geolocation.getCurrentPosition(geoMessage,error,options)
+      $("#removeStorage").click(function( ){
+        remove()
+      });
     });
   </script>
 </body>

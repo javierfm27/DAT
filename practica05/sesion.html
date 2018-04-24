@@ -31,7 +31,8 @@
   <script>
     $(document).ready(function() {
       initHtml()
-      let message = obtainGeoMessage()
+      obtainParamGeo()
+      $(".panel-body").text(message)
       $("#removeStorage").click(function() {
         remove()
       });

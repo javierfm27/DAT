@@ -15,21 +15,16 @@ function initHtml(){
   if (!usuario) {
     let p = prompt("Ingrese aqui su nombre", "p.e. Javier")
     localStorage.setItem('user',p)
-    localStorage.setItem('visited','true')
   }
 }
 
-function obtainGeoMessage(){
-  navigator.geolocation.getCurrentPosition(coord,error,options)
+function obtainParamGeo(){
+  
 }
 
-function coord(pos){
-  let x = pos
-   
-}
 
 function error(err){
-    console.warn('ERROR(${err.code}): ${err.message}')
+    console.warn('ERROR' + err.code + ": " + err.message)
 }
 
 function remove(){

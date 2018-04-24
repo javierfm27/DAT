@@ -6,22 +6,33 @@
 <head>
   <meta charset="utf-8">
   <title>Práctica 5.1. Web Storage. Geolocalización</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <script src="./sesion.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="./sesion.js "></script>
 </head>
 
 <body>
   <div class="container">
-    <p id="message"></p>
-
-    <footer><button id="removeStorage" class="btn btn-warning" name="button">Borrar Info</button></footer>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h2>¿DONDE ESTÁS?</h2>
+      </div>
+      <div class="panel-body">
+        Aquí ira el mensaje de Geolocalización
+      </div>
+      <div class="panel-footer">
+        <button id="removeStorage" class="btn btn-success" name="button">Borrar Info</button>
+      </div>
+    </div>
   </div>
   <script>
-    $(document).ready(function(){
-      let message = initHtml()
-      navigator.geolocation.getCurrentPosition(geoMessage,error,options)
-      $("#removeStorage").click(function( ){
+    $(document).ready(function() {
+      initHtml()
+      let message = obtainGeoMessage()
+      $("#removeStorage").click(function() {
         remove()
       });
     });

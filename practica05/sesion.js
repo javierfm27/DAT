@@ -11,25 +11,25 @@ let options = {
 
 function initHtml(){
   let usuario = localStorage.getItem('user')
-  let fecha = new Date()
 
-  let message = "Hola " + usuario + ". Tu última visita fue con fecha " + fecha
   if (!usuario) {
     let p = prompt("Ingrese aqui su nombre", "p.e. Javier")
     localStorage.setItem('user',p)
-    let message = "Hola " + p + ". Esta es tu primera visita."
-    return message
+    localStorage.setItem('visited','true')
   }
-  return message
+}
+
+function obtainGeoMessage(){
+  navigator.geolocation.getCurrentPosition(coord,error,options)
+}
+
+function coord(pos){
+  let x = pos
+   
 }
 
 function error(err){
     console.warn('ERROR(${err.code}): ${err.message}')
-}
-
-function geoMessage(coord){
-  let x = coord.coords
-  return x
 }
 
 function remove(){

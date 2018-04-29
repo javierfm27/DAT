@@ -31,8 +31,32 @@
   <script>
     $(document).ready(function() {
       initHtml()
-      obtainParamGeo()
-      $(".panel-body").text(message)
+      if (!localStorage.getItem("visited")){
+        let usuario = localStorage.getItem('user')
+        let message = "Hola " + usuario + ". Esta es tu primera visita.\n"
+        obtainParamGeo()
+        let latitud = localStorage.getItem("latitud")
+        let longitud = localStorage.getItem("longitud")
+        let precision = localStorage.getItem("precision")
+        if(!latitud){
+          obtainParamGeo()
+        }
+        message += "Tus coordenadas son: " + latitud + " y " + longitud + " (más menos " + precision +" metros)"
+        alert(message)
+      }else{
+        let latitudOne = localStorage.getItem("latitud")
+        let longitudOne = localStorage.getItem("longitud")
+        let precisionOne = localStorage.getItem("precision")
+        obtainParamGeo()
+        let latitudTwo = localStorage.getItem("latitud")
+        let longitudTwo = localStorage.getItem("longitud")
+        let precisionTwo = localStorage.getItem("precision")
+        if((latitudOne == latitudTwo) && (longitudTwo == longitudOne)){
+          //Mensaje de misma ubicación
+        }else{
+          //Mensaje de ultima ubicación-> de One
+        }
+      }
       $("#removeStorage").click(function() {
         remove()
       });

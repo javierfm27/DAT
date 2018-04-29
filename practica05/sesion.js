@@ -19,9 +19,18 @@ function initHtml(){
 }
 
 function obtainParamGeo(){
-  
+    navigator.geolocation.getCurrentPosition(success, error, options)
 }
 
+function success(position){
+  let x = position.coords
+
+  localStorage.setItem("visited","true")
+  //Guardamos los datos en el diccionario
+  localStorage.setItem("latitud",x.latitude)
+  localStorage.setItem("longitud",x.longitude)
+  localStorage.setItem("precision",x.accuracy)
+}
 
 function error(err){
     console.warn('ERROR' + err.code + ": " + err.message)

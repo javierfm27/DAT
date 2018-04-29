@@ -30,6 +30,7 @@ function success(position){
   localStorage.setItem("latitud",x.latitude)
   localStorage.setItem("longitud",x.longitude)
   localStorage.setItem("precision",x.accuracy)
+  localStorage.setItem('fecha', new Date())
 }
 
 function error(err){

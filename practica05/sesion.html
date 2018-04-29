@@ -20,7 +20,7 @@
       <div class="panel-heading">
         <h2>¿DONDE ESTÁS?</h2>
       </div>
-      <div class="panel-body">
+      <div class="panel-body mensaje">
         Aquí ira el mensaje de Geolocalización
       </div>
       <div class="panel-footer">
@@ -53,6 +53,18 @@
         let precisionTwo = localStorage.getItem("precision")
         if((latitudOne == latitudTwo) && (longitudTwo == longitudOne)){
           //Mensaje de misma ubicación
+          let usuario = localStorage.getItem('user')
+          let fecha = localStorage.getItem('fecha')
+          longitudOne = Number(longitudOne)
+          longitudOne = longitudOne.toFixed(2)
+          longitudOne = String(longitudOne)
+          latitudOne = Number(latitudOne)
+          latitudOne = latitudOne.toFixed(2)
+          latitudOne = String(latitudOne)
+          let message = "Hola " + usuario + " . Tu última visita fue con fecha " + fecha + "<br>"
+          message += "Desde la misma ubicación que ahora (coordenadas " + latitudOne + ", " + longitudOne
+          message += ", más menos " + precisionOne + " metros)"
+          $("#mensaje").text(message)
         }else{
           //Mensaje de ultima ubicación-> de One
         }

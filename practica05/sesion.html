@@ -35,14 +35,13 @@
         let usuario = localStorage.getItem('user')
         let message = "Hola " + usuario + ". Esta es tu primera visita.\n"
         obtainParamGeo()
+        obtainParamGeo()
+        obtainParamGeo()
         let latitud = localStorage.getItem("latitud")
         let longitud = localStorage.getItem("longitud")
         let precision = localStorage.getItem("precision")
-        if(!latitud){
-          obtainParamGeo()
-        }
         message += "Tus coordenadas son: " + latitud + " y " + longitud + " (más menos " + precision +" metros)"
-        alert(message)
+        $('.mensaje').text(message)
       }else{
         let latitudOne = localStorage.getItem("latitud")
         let longitudOne = localStorage.getItem("longitud")
@@ -51,22 +50,26 @@
         let latitudTwo = localStorage.getItem("latitud")
         let longitudTwo = localStorage.getItem("longitud")
         let precisionTwo = localStorage.getItem("precision")
+        let usuario = localStorage.getItem('user')
+        let fecha = localStorage.getItem('fecha')
+        longitud = Number(longitudOne)
+        longitud = longitud.toFixed(2)
+        longitud = String(longitud)
+        latitud = Number(latitudOne)
+        latitud = latitud.toFixed(2)
+        latitud = String(latitud)
         if((latitudOne == latitudTwo) && (longitudTwo == longitudOne)){
-          //Mensaje de misma ubicación
-          let usuario = localStorage.getItem('user')
-          let fecha = localStorage.getItem('fecha')
-          longitudOne = Number(longitudOne)
-          longitudOne = longitudOne.toFixed(2)
-          longitudOne = String(longitudOne)
-          latitudOne = Number(latitudOne)
-          latitudOne = latitudOne.toFixed(2)
-          latitudOne = String(latitudOne)
-          let message = "Hola " + usuario + " . Tu última visita fue con fecha " + fecha + "<br>"
-          message += "Desde la misma ubicación que ahora (coordenadas " + latitudOne + ", " + longitudOne
+          //Mensaje de misma ubicación)
+          let message = "Hola " + usuario + " . Tu última visita fue con fecha " + fecha
+          message += "Desde la misma ubicación que ahora (coordenadas " + latitud + ", " + longitud
           message += ", más menos " + precisionOne + " metros)"
-          $("#mensaje").text(message)
+          $('.mensaje').text(message)
         }else{
           //Mensaje de ultima ubicación-> de One
+          let message = "Hola " + usuario + ". Tu última visita fue con fecha " + fecha
+          message += " desde las coordenadas " + latitud + ", " + longitud + " (más menos "
+          message += precisionOne + " metros)."
+          $('.mensaje').text(message)
         }
       }
       $("#removeStorage").click(function() {

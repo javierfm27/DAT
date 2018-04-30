@@ -1,0 +1,44 @@
+<!--Usuario: jmorata
+ Javier Fernández Morata-->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Práctica 5.3. JSON y LocalStorage</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="./sesion2.js "></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h2>¿DONDE ESTÁS?</h2>
+      </div>
+      <div class="panel-body mensaje">
+        Aquí ira el mensaje de Geolocalización
+      </div>
+      <div class="panel-footer">
+        <button id="removeStorage" class="btn btn-success" name="button">Borrar Info</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    initHtml()
+    navigator.geolocation.getCurrentPosition(success, error, options)
+    if (!localStorage.getItem('FirstVisited')) {
+      let datos = localStorage.getItem('info')
+      localStorage.setItem('FirstVisited',true)
+    }
+    $("#removeStorage").click(function() {
+      remove()
+    });
+  </script>
+</body>
+
+</html>

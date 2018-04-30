@@ -5,7 +5,6 @@ Nombre: Javier Fernández Morata
 'use strict'
 let options = {
   enableHighAccuracy: true,
-  timeout: 5000,
   maximumAge: 0,
 }
 
@@ -25,12 +24,13 @@ function obtainParamGeo(){
 function success(position){
   let x = position.coords
 
-  localStorage.setItem("visited","true")
   //Guardamos los datos en el diccionario
+  console.log("Lo guardo")
   localStorage.setItem("latitud",x.latitude)
   localStorage.setItem("longitud",x.longitude)
   localStorage.setItem("precision",x.accuracy)
   localStorage.setItem('fecha', new Date())
+  
 }
 
 function error(err){

@@ -31,15 +31,15 @@
   <script>
     $(document).ready(function() {
       initHtml()
+      obtainParamGeo()
       if (!localStorage.getItem("visited")){
+        console.log("Accedemos a lo guardado")
         let usuario = localStorage.getItem('user')
         let message = "Hola " + usuario + ". Esta es tu primera visita.\n"
-        obtainParamGeo()
-        obtainParamGeo()
-        obtainParamGeo()
         let latitud = localStorage.getItem("latitud")
         let longitud = localStorage.getItem("longitud")
         let precision = localStorage.getItem("precision")
+        localStorage.setItem("visited","true")
         message += "Tus coordenadas son: " + latitud + " y " + longitud + " (más menos " + precision +" metros)"
         $('.mensaje').text(message)
       }else{

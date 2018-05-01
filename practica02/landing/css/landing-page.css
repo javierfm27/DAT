@@ -12,6 +12,10 @@ h6 {
   font-weight: 700;
 }
 
+section#video{
+  background-color: white;
+}
+
 header.masthead {
   position: relative;
   background-color: #343a40;

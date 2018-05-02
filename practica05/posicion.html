@@ -1,0 +1,35 @@
+<!--
+Nombre: Javier Fernández Morata
+Login: jmorata
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Práctica 5.6. Geolocalización y mapas</title>
+  <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+  <style media="screen">
+    #mapa {
+      height: 400px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="mapa">
+
+  </div>
+  <script>
+    $(document).ready(function(){
+      //Para ello vamos a usar la geolocalizacion para encontrar nuestra posicion
+      navigator.geolocation.getCurrentPosition(success, error, options)
+      function success(posicion){
+        let x = posicion
+        console.log(x.latitude + x.longitude)
+      };
+    });
+  </script>
+</body>
+
+</html>

@@ -30,47 +30,35 @@
   </div>
   <script>
     $(document).ready(function() {
-      initHtml()
-      obtainParamGeo()
-      if (!localStorage.getItem("visited")){
-        console.log("Accedemos a lo guardado")
-        let usuario = localStorage.getItem('user')
-        let message = "Hola " + usuario + ". Esta es tu primera visita.\n"
-        let latitud = localStorage.getItem("latitud")
-        let longitud = localStorage.getItem("longitud")
-        let precision = localStorage.getItem("precision")
-        localStorage.setItem("visited","true")
-        message += "Tus coordenadas son: " + latitud + " y " + longitud + " (más menos " + precision +" metros)"
-        $('.mensaje').text(message)
+
+      navigator.geolocation.getCurrentPosition(success, error, options)
+      if(!localStorage.getItem('user')){
+        initHtml()
+        let mensaje = "Hola " + localStorage.getItem('user') + ". Esta es tu primera visita. Tus coordenadas son: "
+        mensaje += String(Number(localStorage.getItem('latitud')).toFixed(2)) + " y " + String(Number(localStorage.getItem('longitud')).toFixed(2))
+        mensaje += " (más menos " + localStorage.getItem('precision') + " metros)"
+        $('.mensaje').text(mensaje)
       }else{
-        let latitudOne = localStorage.getItem("latitud")
-        let longitudOne = localStorage.getItem("longitud")
-        let precisionOne = localStorage.getItem("precision")
-        obtainParamGeo()
-        let latitudTwo = localStorage.getItem("latitud")
-        let longitudTwo = localStorage.getItem("longitud")
-        let precisionTwo = localStorage.getItem("precision")
-        let usuario = localStorage.getItem('user')
+        //Primero sacamos las coordenadas para comparar
+        let latitud = String(Number(localStorage.getItem('latitud')).toFixed(2))
+        let longitud = String(Number(localStorage.getItem('longitud')).toFixed(2))
         let fecha = localStorage.getItem('fecha')
-        longitud = Number(longitudOne)
-        longitud = longitud.toFixed(2)
-        longitud = String(longitud)
-        latitud = Number(latitudOne)
-        latitud = latitud.toFixed(2)
-        latitud = String(latitud)
-        if((latitudOne == latitudTwo) && (longitudTwo == longitudOne)){
-          //Mensaje de misma ubicación)
-          let message = "Hola " + usuario + " . Tu última visita fue con fecha " + fecha
-          message += "Desde la misma ubicación que ahora (coordenadas " + latitud + ", " + longitud
-          message += ", más menos " + precisionOne + " metros)"
-          $('.mensaje').text(message)
+        //Guardamos la posición actual
+        navigator.geolocation.getCurrentPosition(success, error, options)
+
+        //Comparamos coordenadas
+        if((latitud==String(Number(localStorage.getItem('latitud')).toFixed(2))) && (longitud==String(Number(localStorage.getItem('longitud')).toFixed(2)))) {
+          var mensaje = "Hola " + localStorage.getItem('user') + " .Tu última visita fue fecha " + fecha
+          mensaje += " desde la misma ubicación que ahora (coordenadas "
+          mensaje += String(Number(localStorage.getItem('latitud')).toFixed(2)) + " y " + String(Number(localStorage.getItem('longitud')).toFixed(2))
+          mensaje += " más menos " + localStorage.getItem('precision') + " metros)"
         }else{
-          //Mensaje de ultima ubicación-> de One
-          let message = "Hola " + usuario + ". Tu última visita fue con fecha " + fecha
-          message += " desde las coordenadas " + latitud + ", " + longitud + " (más menos "
-          message += precisionOne + " metros)."
-          $('.mensaje').text(message)
+          var mensaje = "Hola " + localStorage.getItem('user') + " .Tu última visita fue fecha " + fecha
+          mensaje += " desde las coordenadas "
+          mensaje += String(Number(localStorage.getItem('latitud')).toFixed(2)) + " y " + String(Number(localStorage.getItem('longitud')).toFixed(2))
+          mensaje += "(mas menos " + localStorage.getItem('precision') + " metros)"
         }
+        $('.mensaje').text(mensaje)
       }
       $("#removeStorage").click(function() {
         remove()

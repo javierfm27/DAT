@@ -17,10 +17,6 @@ function initHtml(){
   }
 }
 
-function obtainParamGeo(){
-    navigator.geolocation.getCurrentPosition(success, error, options)
-}
-
 function success(position){
   let x = position.coords
 
@@ -30,7 +26,7 @@ function success(position){
   localStorage.setItem("longitud",x.longitude)
   localStorage.setItem("precision",x.accuracy)
   localStorage.setItem('fecha', new Date())
-  
+
 }
 
 function error(err){

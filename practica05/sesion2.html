@@ -5,7 +5,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Práctica 5.3. JSON y LocalStorage</title>
+  <title>Práctica 5.2. JSON y localStorage</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -29,14 +29,41 @@
     </div>
   </div>
   <script>
-    initHtml()
-    navigator.geolocation.getCurrentPosition(success, error, options)
-    if (!localStorage.getItem('FirstVisited')) {
-      let datos = localStorage.getItem('info')
-      localStorage.setItem('FirstVisited',true)
-    }
-    $("#removeStorage").click(function() {
-      remove()
+    $(document).ready(function() {
+
+      let primeraVisita = initObject()
+      let ubiObject = JSON.parse(localStorage.getItem('ubi'))
+      if(primeraVisita){
+        let mensaje = "Hola " + ubiObject.usuario + " . Esta es tu primera visita. Tus coordenadas son: "
+        mensaje += ubiObject.latitud + " y " + ubiObject.longitud
+        mensaje += " (más menos " + ubiObject.precision + " metros)"
+        $('.mensaje').text(mensaje)
+      }else{
+        //Primero sacamos las coordenadas para comparar
+        let latitud = ubiObject.latitud
+        let longitud =ubiObject.longitud
+        let fecha = ubiObject.fecha
+        //Guardamos la posición actual
+        navigator.geolocation.getCurrentPosition(success, error, options)
+
+        let ubiNueva = JSON.parse(localStorage.getItem('ubi'))
+        //Comparamos coordenadas
+        if((latitud==ubiNueva.latitud) && (longitud==ubiNueva.longitud)) {
+          var mensaje = "Hola " + ubiNueva.usuario + " .Tu última visita fue fecha " + fecha
+          mensaje += " desde la misma ubicación que ahora (coordenadas "
+          mensaje += ubiNueva.latitud + " y " + ubiNueva.longitud
+          mensaje += " más menos " + ubiNueva.precision + " metros)"
+        }else{
+          var mensaje = "Hola " + ubiObject.usuario + " .Tu última visita fue fecha " + fecha
+          mensaje += " desde las coordenadas "
+          mensaje += ubiObject.latitud + " y " + ubiObject.longitud
+          mensaje += "(mas menos " + ubiObject.precision+ " metros)"
+        }
+        $('.mensaje').text(mensaje)
+      }
+      $("#removeStorage").click(function() {
+        remove()
+      });
     });
   </script>
 </body>

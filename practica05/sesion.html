@@ -31,11 +31,10 @@
   <script>
     $(document).ready(function() {
 
-      navigator.geolocation.getCurrentPosition(success, error, options)
-      if(!localStorage.getItem('user')){
-        initHtml()
+      let primeravisita = initObject()
+      if(primeravisita){
         let mensaje = "Hola " + localStorage.getItem('user') + ". Esta es tu primera visita. Tus coordenadas son: "
-        mensaje += String(Number(localStorage.getItem('latitud')).toFixed(2)) + " y " + String(Number(localStorage.getItem('longitud')).toFixed(2))
+        mensaje += localStorage.getItem('latitud') + " y " + localStorage.getItem('longitud')
         mensaje += " (más menos " + localStorage.getItem('precision') + " metros)"
         $('.mensaje').text(mensaje)
       }else{

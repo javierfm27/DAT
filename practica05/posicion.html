@@ -8,27 +8,48 @@ Login: jmorata
 <head>
   <meta charset="utf-8">
   <title>Práctica 5.6. Geolocalización y mapas</title>
-  <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
   <style media="screen">
     #mapa {
-      height: 400px;
+      width: 100%;
+      height: 600px;
+      box-shadow: 5px 5px 5px #888;
     }
   </style>
 </head>
 
 <body>
   <div id="mapa">
-
   </div>
   <script>
-    $(document).ready(function(){
-      //Para ello vamos a usar la geolocalizacion para encontrar nuestra posicion
-      navigator.geolocation.getCurrentPosition(success, error, options)
-      function success(posicion){
-        let x = posicion
-        console.log(x.latitude + x.longitude)
-      };
-    });
+    $(document).ready(function() {
+          'use strict'
+
+          function error(err) {
+            console.warn('ERROR' + err.code + ": " + err.message)
+          }
+
+          let options = {
+            enableHighAccuracy: true,
+            maximumAge: 0,
+          }
+
+          function success(posicion) {
+            console.log("Second Step")
+            let x = posicion.coords
+            let mi_mapa = L.map('mapa').setView([x.latitude, x.longitude], 26);
+            L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+              attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
+              maxZoom: 18,
+            }).addTo(mi_mapa)
+          }
+
+            //Main del Script
+            console.log("First Step")
+            navigator.geolocation.getCurrentPosition(success, error, options)
+          });
   </script>
 </body>
 

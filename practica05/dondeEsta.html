@@ -1,0 +1,88 @@
+<!--
+  Nombre:  Javier Fernández Morata
+  login: jmorata
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Práctica 5.7. ¿Dónde está mi coche?</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <style media="screen">
+    #mapa {
+      width: 100%;
+      height: 400px;
+      box-shadow: 5px 5px 5px #888;
+      margin-top: 10px;
+    }
+
+    .botones {
+      padding-top: 10px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div id="mapa">
+
+    </div>
+    <div class="botones">
+      <button class="btn btn-success" id="Recordar">Recordar Posición</button>
+    </div>
+
+  </div>
+  <script>
+    $(document).ready(function() {
+      'use strict'
+
+      function error(err) {
+        console.warn('ERROR' + err.code + ": " + err.message)
+      }
+
+      let options = {
+        enableHighAccuracy: true,
+        maximumAge: 0,
+      }
+
+      //Fúncion que se encargara de obtener la posición del coche
+      function success(posicion) {
+        let x = posicion.coords
+
+        localStorage.setItem('latitud', x.latitude)
+        localStorage.setItem('longitud', x.longitude)
+      }
+
+
+      //Fúncion que cargará el mapa
+      function loadMap(posicion) {
+        let x = posicion.coords
+        let mi_mapa = L.map('mapa').setView([x.latitude,x.longitude], 26);
+        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
+          maxZoom: 18,
+        }).addTo(mi_mapa)
+
+        //Pondremos el popUp del coche y del usuario
+        let marcadorCoche = L.marker([localStorage.getItem('latitud'), localStorage.getItem('longitud')]).addTo(mi_mapa)
+        marcadorCoche.bindPopup("Tu coche").openPopup()
+        let marcadorUser = L.marker([x.latitude,x.longitude]).addTo(mi_mapa)
+        marcadorUser.bindPopup("Usted está aquí").openPopup()
+      }
+
+      $('#Recordar').click(function(){
+        navigator.geolocation.getCurrentPosition(success, error, options)
+      })
+
+      //Main del Script
+      navigator.geolocation.getCurrentPosition(loadMap, error, options)
+    });
+  </script>
+</body>
+
+</html>

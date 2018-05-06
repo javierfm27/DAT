@@ -24,7 +24,7 @@ function conversion(src,dest){
       return(result.toFixed(2));
       break;
     default:
-      console.log("Error: dest must be 'm/s','km/h' o 'mph'");
+      console.log("Error: 'dest' must be 'm/s','km/h' o 'mph'");
       return -1;
   }
 }
@@ -32,7 +32,7 @@ function conversion(src,dest){
 
 let dest, metros, unidad;
 metros = '33';
-unidad = 'm/s';
+unidad = 'km/h';
 dest = conversion(metros,unidad);
 if (dest != -1){
   console.log(metros + 'm/s son ' + dest + ' ' + unidad);

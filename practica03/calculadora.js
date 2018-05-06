@@ -80,6 +80,7 @@ function getKey(key, calc){
       }else{
         waitingSecondOperating(calc,key)
       }
+      return ''
     }else{
       if(key == "="){
         showResult(calc)
@@ -111,18 +112,16 @@ function testCalc(){
     haveOperator: false,
   }
   console.log(getKey(3,calculator))
-  console.log(getKey("+",calculator))
-  console.log(getKey(5,calculator))
-  console.log(getKey("*",calculator))
   console.log(getKey(2,calculator))
-  console.log(getKey("=",calculator))
-  console.log(getKey("c",calculator))
-  console.log(getKey(1,calculator))
-  console.log(getKey(1,calculator))
-  console.log(getKey("*",calculator))
+  console.log(getKey('+',calculator))
+  console.log(getKey(4,calculator))
+  console.log(getKey('c',calculator))
+  console.log(getKey('=',calculator))
   console.log(getKey(2,calculator))
-  console.log(getKey("=",calculator))
+  console.log(getKey('+',calculator))
+  console.log(getKey(4,calculator))
+  console.log(getKey('+',calculator))
 }
 
 //Main de JavaScript
-//testCalc()
+testCalc()

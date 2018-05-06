@@ -23,6 +23,6 @@ function metresToMilles (x){
 let y, z, x;
 x = 40;
 y = metresToKm(x);
-z = metresToMilles(x);
+z = metresToMilles(x).toFixed(2);
 console.log(x + 'm/s son ' + y + ' km/h');
 console.log(x + 'm/s son ' + z + ' millas/s');

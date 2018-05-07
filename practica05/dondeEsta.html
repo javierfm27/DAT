@@ -24,16 +24,22 @@
       padding-top: 10px;
       margin-top: 10px;
     }
+
+    .oculto{
+      display: none;
+    }
   </style>
 </head>
 
 <body>
   <div class="container-fluid">
+    <h3>Colega, ¿donde está mi coche?</h3>
     <div id="mapa">
 
     </div>
     <div class="botones">
       <button class="btn btn-success" id="Recordar">Recordar Posición</button>
+      <button class="btn btn-info oculto" id="Borrar">Borrar Posición</button>
     </div>
 
   </div>
@@ -50,37 +56,65 @@
         maximumAge: 0,
       }
 
-      //Fúncion que se encargara de obtener la posición del coche
-      function success(posicion) {
-        let x = posicion.coords
-
-        localStorage.setItem('latitud', x.latitude)
-        localStorage.setItem('longitud', x.longitude)
-      }
-
-
-      //Fúncion que cargará el mapa
-      function loadMap(posicion) {
-        let x = posicion.coords
-        let mi_mapa = L.map('mapa').setView([x.latitude,x.longitude], 26);
-        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
-          maxZoom: 18,
-        }).addTo(mi_mapa)
-
-        //Pondremos el popUp del coche y del usuario
-        let marcadorCoche = L.marker([localStorage.getItem('latitud'), localStorage.getItem('longitud')]).addTo(mi_mapa)
-        marcadorCoche.bindPopup("Tu coche").openPopup()
-        let marcadorUser = L.marker([x.latitude,x.longitude]).addTo(mi_mapa)
-        marcadorUser.bindPopup("Usted está aquí").openPopup()
-      }
-
-      $('#Recordar').click(function(){
-        navigator.geolocation.getCurrentPosition(success, error, options)
+      //Función al clickar borra la posicion del cocheJSON
+      $('#Borrar').click(function (){
+        localStorage.removeItem('car')
+        $('#Borrar').toggleClass('oculto')
       })
 
+      //Funcion al clickar el botón de recordar
+      $('#Recordar').click(function(){
+        navigator.geolocation.getCurrentPosition(posicionCar, error, options)
+      })
+
+      //Funciones que guardan la posicion del usuario y coche
+      function posicionCar(pos){
+        let x = pos.coords
+
+        let coche = {
+          latitud : x.latitude,
+          longitud: x.longitude,
+        }
+        localStorage.setItem('car',JSON.stringify(coche))
+        $('#Borrar').toggleClass('oculto')
+        let marcadorCoche = L.marker([coche.latitud,coche.longitud]).addTo(mi_mapa)
+        marcadorCoche.bindPopup("Colega,su coche")
+
+      }
+
+      function posicionUser(pos){
+        let x = pos.coords
+
+        let usuario = {
+          latitud : x.latitude,
+          longitud: x.longitude,
+        }
+        localStorage.setItem('user',JSON.stringify(usuario))
+      }
+
       //Main del Script
-      navigator.geolocation.getCurrentPosition(loadMap, error, options)
+      navigator.geolocation.getCurrentPosition(posicionUser, error, options)
+
+      //Cargamos el Mapa y popup del usuario
+      let usuario = localStorage.getItem('user')
+      let usuariObject = JSON.parse(usuario)
+      let mi_mapa = L.map('mapa').setView([40.2903,-3.79124], 26);
+      L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
+        maxZoom: 18,
+      }).addTo(mi_mapa)
+      let marcadorUser = L.marker([usuariObject.latitud,usuariObject.longitud]).addTo(mi_mapa)
+      marcadorUser.bindPopup("Usted está aquí").openPopup()
+
+      //POPUP Car
+      let cocheJSON = localStorage.getItem('car')
+      if(cocheJSON){
+        console.log("Hay coche")
+        $('#Borrar').toggleClass('oculto')
+        let cocheObject = JSON.parse(cocheJSON)
+        let marcadorCoche = L.marker([cocheObject.latitud,cocheObject.longitud]).addTo(mi_mapa)
+        marcadorCoche.bindPopup("Colega,su coche")
+      }
     });
   </script>
 </body>

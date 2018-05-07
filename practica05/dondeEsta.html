@@ -75,6 +75,7 @@
           latitud : x.latitude,
           longitud: x.longitude,
         }
+        console.log("Guardamos coche")
         localStorage.setItem('car',JSON.stringify(coche))
         $('#Borrar').toggleClass('oculto')
         let marcadorCoche = L.marker([coche.latitud,coche.longitud]).addTo(mi_mapa)
@@ -94,16 +95,16 @@
 
       //Main del Script
       navigator.geolocation.getCurrentPosition(posicionUser, error, options)
-
+      console.log("Cargamos Mapa")
       //Cargamos el Mapa y popup del usuario
       let usuario = localStorage.getItem('user')
       let usuariObject = JSON.parse(usuario)
-      let mi_mapa = L.map('mapa').setView([40.2903,-3.79124], 26);
+      let mi_mapa = L.map('mapa').setView([usuariObject.latitud,usuariObject.longitud], 26);
       L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
         maxZoom: 18,
       }).addTo(mi_mapa)
-      let marcadorUser = L.marker([usuariObject.latitud,usuariObject.longitud]).addTo(mi_mapa)
+      let marcadorUser = L.marker([40.3351225,-3.8743709]).addTo(mi_mapa)
       marcadorUser.bindPopup("Usted está aquí").openPopup()
 
       //POPUP Car
